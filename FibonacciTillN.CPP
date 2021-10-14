@@ -4,6 +4,9 @@ using namespace std;
 int main(int argc, char **argv)
 {
     int n;
+    
+    cout<<"enter the total numbers you want for fibbonacci series it shoul be less than 50--"<<endl;
+
     cin >> n;
     int arr[50];
     
@@ -16,5 +19,13 @@ int main(int argc, char **argv)
     }
     
     //write your code here
+    int k=0;
+
+    cout<<endl;
+    for(int i=0;i<n;i++){
+        k+=arr[i];
+    }
+    cout<<"the sum is--"<<k<<endl;
+
     
 }

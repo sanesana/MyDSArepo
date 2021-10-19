@@ -1,0 +1,38 @@
+//The string "PAYPALISHIRING" is written in a zigzag pattern on a given number of rows like this: (you may want to display this pattern in a fixed font for better legibility)
+//P   A   H   N
+//A P L S I I G
+//Y   I   R
+//And then read line by line: "PAHNAPLSIIGYIR"
+//Write the code that will take a string and make this conversion given a number of rows:
+//string convert(string s, int numRows);
+class Solution {
+public:
+    string convert(string s, int numRows) {
+        int l = s.size();
+        string zigZag; 
+        zigZag += s[0]; 
+        
+        if(numRows==1 || numRows>l) return s;
+        int startIndex = 0, firstIndex = 0, skip = 0;
+        bool doSkip = false;
+        int separation = 2*numRows - 2;
+        
+        while(separation >= 0) {
+            if(doSkip || separation==0) {
+                startIndex += skip;
+            } else {
+                startIndex += separation;
+            }
+            if(skip && separation) doSkip = !doSkip;
+            if(startIndex >= l) {
+                firstIndex += 1;
+                startIndex = firstIndex;
+                separation -= 2;
+                skip += 2;
+                doSkip = false;
+            }
+            if(separation >= 0) zigZag += s[startIndex];
+        }
+        return zigZag;
+    }
+};

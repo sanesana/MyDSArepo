@@ -5,7 +5,7 @@ bool leapYear(int y);
 
 int main(){
    int y;
-   cout<<"Enter year: ";
+   cout<<"Enter year for checking leap year: ";
    cin>>y;
    //Calling function
    bool flag = leapYear(y);

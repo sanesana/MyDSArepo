@@ -1,0 +1,64 @@
+#include<stdio.h>
+#include<math.h>
+
+#define MAX 20
+#define TRUE 1
+#define FALSE 0
+
+int count=0;
+/*Can a new queen be placed in kth row and ith column*/
+/*funtion to check conflicts
+If no conflict for desired postion returns 1 otherwise returns 0*/
+int Place(int x[],int k,int i){
+	int j;
+	for(j=1;j<k;j++)
+//checking column and digonal conflicts
+		if((x[j]==i) || (abs(x[j]-i)==abs(j-k)))
+			return FALSE;
+//no conflicts
+	return TRUE;
+}
+//function for printing the solution
+void print(int x[],int n)
+{
+//	static int count;
+ 	int i,j;
+ 	printf("\n\nSolution %d:\n\n",++count); 
+ 	for(i=1;i<=n;++i)
+  		printf("\t%d",i); 
+	printf("\n");
+  	for(i=1;i<=n;++i)
+	  	printf("\t--");	
+ 	for(i=1;i<=n;++i)
+ 	{
+  		printf("\n\n%d|",i);
+  		for(j=1;j<=n;++j) //for nxn board
+  		{
+   			if(x[i]==j)
+   				printf("\tQ"); //queen at i,j position
+   			else
+    			printf("\t*"); //empty slot
+  		}
+ 	}
+}
+/*All solutions to the n-queen problem*/
+//function to check for proper positioning of queen
+void NQueen(int x[],int k,int n){
+	int i;
+	for(i=1;i<=n;i++){
+		if(Place(x,k,i)){
+			x[k]=i;//no conflicts so place queen
+			if(k==n)//dead end
+				print(x,n);//printing the board configuration
+			else
+				NQueen(x,k+1,n);	//try queen with next position
+		}
+	}
+}
+int main(){
+	int n,x[MAX];
+	printf("Enter number of Queens:");
+ 	scanf("%d",&n);
+ 	NQueen(x,1,n);
+	return 0;
+}
